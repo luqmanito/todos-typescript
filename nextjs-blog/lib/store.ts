@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { pokemonApi } from "./pokemonApi";
+import {todosApi } from "./todosApi";
 
 export const makeStore = () =>
   configureStore({
     reducer: {
-      [pokemonApi.reducerPath]: pokemonApi.reducer,
+      [todosApi.reducerPath]: todosApi.reducer,
     },
-    middleware: (gDM) => gDM().concat(pokemonApi.middleware),
+    middleware: (gDM) => gDM().concat(todosApi.middleware),
   });
 
 export type AppStore = ReturnType<typeof makeStore>;

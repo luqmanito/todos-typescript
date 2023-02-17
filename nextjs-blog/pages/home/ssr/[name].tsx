@@ -1,24 +1,25 @@
 import {
-  getPokemonByName,
+  getTodos,
   getRunningQueriesThunk,
-} from "../../../lib/pokemonApi";
+} from "../../../lib/todosApi";
 
 import { wrapper } from "../../../lib/store";
-import Pokemon from "../[name]";
+import TodosHome from "../[name]";
 
-export default Pokemon;
+export default TodosHome;
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const name = context.params?.name;
+
     if (typeof name === "string") {
-      store.dispatch(getPokemonByName.initiate(name));
+      store.dispatch(getTodos.initiate(name));
     }
 
     await Promise.all(store.dispatch(getRunningQueriesThunk()));
-
     return {
       props: {},
+      // revalidate: 60
     };
   }
 );
